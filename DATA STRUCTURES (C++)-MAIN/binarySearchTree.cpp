@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+struct node *createBinarySearchTreeNode(int);
+void inOrderTraversal(struct node *);
+
+// There're Some Condtitions To Be A "BST";
+/*
+    1. All Nodes Of Left-Sub-Tree Are "Lesser"(in-Value).
+    2. All Nodes Of Right-Sub-Tree Are "Greater"(in-Value).
+    3. Left & Right Sub-Trees Are Also "BST".
+    4. There're "NO" [Dublicate-Nodes].
+    [MOST-IMPORTANT-PROPERTY] 5. In-Order Traversal Of A "BST" Gives An [Ascending-Sorted-Array]
+
+    E.g. of [BST]:-
+                    9
+                  /   \
+                 4     11
+                / \      \
+               2   7      13
+                  / \     /
+                 5   8   14
+*/
+
+int isBST(struct node *);
+struct node
+{
+    int data;
+    struct node *left, *right;
+};
+
+struct node *createBinarySearchTreeNode(int item)
+{
+    struct node *n = new node[sizeof(node)];
+    n->data = item;
+    n->left = NULL;
+    n->right = NULL;
+
+    return n;
+}
+int isBST(struct node *root)
+{
+    static struct node *prev = NULL;
+    if (root != NULL)
+    {
+        if (!isBST(root->left))
+            return 0;
+        if (prev != NULL && root->data <= prev->data)
+            return 0;
+        prev = root;
+        return (isBST(root->right));
+    }
+    else
+        return 1;
+}
+
+void inOrderTraversal(struct node *root)
+{
+    if (root == NULL)
+        return;
+    inOrderTraversal(root->left);
+    cout << root->data << '\n';
+    inOrderTraversal(root->right);
+}
+
+/*---------- Searching in bst -----------*/
+// recursive Approach
+int searchInBST(int data, struct node *root)
+{
+    if (root == NULL)
+        return -1;
+    else if (data > root->data)
+        return (searchInBST(data, root->right));
+    else if (data < root->data)
+        return (searchInBST(data, root->left));
+    else if (root->data == data)
+        return root->data;
+    else
+        return -1;
+}
+
+// iterative Approach
+int searchInBST2(int data, struct node *root)
+{
+    while (root != NULL)
+    {
+        if (root == NULL)
+            return -1;
+        else if (data > root->data)
+            root = root->right;
+        else if (data < root->data)
+            root = root->left;
+        else if (root->data == data)
+            return (root->data);
+    }
+}
+/*---------- Searching in bst -----------*/
+
+int main(void)
+{
+    struct node *n, *n1, *n2, *n3, *n4, *n5, *n6;
+    n = createBinarySearchTreeNode(12);
+    n1 = createBinarySearchTreeNode(8);
+    n2 = createBinarySearchTreeNode(18);
+    n3 = createBinarySearchTreeNode(14);
+    n4 = createBinarySearchTreeNode(22);
+    n5 = createBinarySearchTreeNode(4);
+    n6 = createBinarySearchTreeNode(9);
+    // linking the nodes as Bst structure...
+    n->left = n1;
+    n->right = n2;
+
+    n2->left = n3;
+    n2->right = n4;
+
+    n1->left = n5;
+    n1->right = n6;
+
+    // inOrderTraversal(n);
+    // cout << isBST(n);
+
+    cout << searchInBST2pf(4, n);
+}
