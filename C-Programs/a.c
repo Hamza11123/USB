@@ -168,14 +168,11 @@ main()
                if(brk == 1)
                {
                    printf("\n\n\n\n\n\n\n\n\n\n");
-
-                   exit(1);
-
                    getch();
+                   exit(1);
                }
                if(ar[0] != ar[1] && ar[1] != ar[2] && ar[2] != ar[3] && ar[3] != ar[4] && ar[4] != ar[5] && ar[5] != ar[6] && ar[6] != ar[7] && ar[7] != ar[8] && ar[8] != ar[9])
                {
-                   printf("\n\nThe Match Was Draw!\n\n\n\n\n\n\n\n\n\n\n");
 
                }
 
@@ -184,6 +181,9 @@ main()
            lp++;
 
     }
+                   printf("\n\nThe Match Was Draw!\n\n\n\n\n\n\n\n\n\n\n");
+                   getch();
+     getch();
 
 
 }

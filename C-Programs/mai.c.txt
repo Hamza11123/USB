@@ -1,0 +1,48 @@
+#include <iostream>
+#include<stdio.h>
+#define pie 3.14
+
+float Area(int,int=0);
+
+
+int  main()
+{
+  int len, rad, bre;
+  int convert;
+  char ch;
+  printf("              Enter The Choice\n ");
+  printf("\n1: Calculate The Area Of A Circle.");
+  printf("\n2: Calculate The Area Of Rectangle. \n\n");
+
+  scanf("%c",&ch);
+
+  if(ch == '1')
+  {
+    printf("\n\nSo, Enter The Radius Of The Radius Of The Circle.\n");
+    scanf("%d",&rad);
+    printf("The Area Of Circle Is %f", Area(rad));
+  }
+  else
+  {
+    if(ch == '2')
+    printf("\n\nSo, Enter The Length And Breadth Of The Rectangle.\n");
+    scanf("%d%d", &len, &bre);
+    convert = Area(len, bre);
+    printf("The Area Of Rectangle Is %d", convert);
+  }
+
+  return 0;
+}
+
+
+float Area(int x, int y)
+{
+  if(y == 0)
+  {
+    return (x*x*pie);
+  }
+  else
+  {
+    return (x*y);
+  }
+}
